@@ -26,6 +26,37 @@ public class Binary {
         }
     }
 
+    static class Solution2 {
+        public int search(int[] nums, int target) {
+            if (nums == null || nums.length == 0) {
+                return -1;
+            }
+            return doSearch(nums, target, 0, nums.length - 1);
+        }
+
+        public int doSearch(int[] nums, int target, int start, int end) {
+            if (start > end) {
+                return -1;
+            }
+            if (start == end) {
+                if (nums[start] == target) {
+                    return start;
+                }
+                return -1;
+            }
+            int mid = start + (end - start) / 2;
+            int result = doSearch(nums, target, start, mid);
+            if (result != -1) {
+                return result;
+            }
+            result = doSearch(nums, target, mid + 1, end);
+            if (result != -1) {
+                return result;
+            }
+            return -1;
+        }
+    }
+
     public static void main(String[] args) {
         int[] testCase1 = null;
         int[] testCase2 = new int[]{};
