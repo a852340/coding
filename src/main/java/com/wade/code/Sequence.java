@@ -1,5 +1,7 @@
 package com.wade.code;
 
+import java.util.Arrays;
+
 public class Sequence {
     // TLO
     static class Solution {
@@ -62,10 +64,29 @@ public class Sequence {
         }
     }
 
+    static class Solution3 {
+
+        public int lengthOfLIS(int[] nums) {
+            int[] dp = new int[nums.length];
+            Arrays.fill(dp, 1);
+            int result = 1;
+            for (int i = 1;i < nums.length;i++) {
+                for (int j = 0;j < i;j++) {
+                    if (nums[i] > nums[j]) {
+                        dp[i] = Math.max(dp[j] + 1, dp[i]);
+                    }
+                }
+                result = Math.max(dp[i], result);
+            }
+            return result;
+        }
+
+    }
+
     public static void main(String[] args) {
         //int[] nums = new int[]{10,9,2,5,3,7,101,18};
         int[] nums = new int[]{1,3,6,7,9,4,10,5,6};
-        Solution2 solution = new Solution2();
+        Solution3 solution = new Solution3();
         System.out.println(solution.lengthOfLIS(nums));
 
     }
