@@ -27,7 +27,7 @@ public class Sequence {
             int[] dp = new int[nums.length];
             int max = 0;
             for (int i = 0;i < nums.length;i++) {
-                max = Math.max(max, doLengthOfLIS(nums, i, dp));
+                max = Math.max(max, doLengthOfLIS2(nums, i, dp));
             }
             return max;
         }
@@ -41,6 +41,20 @@ public class Sequence {
                     } else {
                         max = Math.max(doLengthOfLIS(nums, j, dp) + 1, max);
                     }
+                }
+            }
+            dp[i] = max;
+            return max;
+        }
+
+        public int doLengthOfLIS2(int[] nums, int i, int[] dp) {
+            if (dp[i] != 0) {
+                return dp[i];
+            }
+            int max = 1;
+            for (int j = 0;j < i;j++) {
+                if (nums[i] > nums[j]) {
+                    max = Math.max(doLengthOfLIS(nums, j, dp) + 1, max);
                 }
             }
             dp[i] = max;
